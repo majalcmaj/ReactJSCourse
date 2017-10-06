@@ -1,4 +1,5 @@
-import Firebase from '../firebase';
+import Firebase from '../helpers/Firebase';
+import AuthHelper from '../helpers/Auth';
 import {FETCH_POSTS} from './types';
 
 const database = Firebase.database();
@@ -16,4 +17,12 @@ export function fetchPosts() {
             });
         });
     }
+}
+
+export function signIn(email, password, onSuccess, onError) {
+    new AuthHelper(Firebase).singIn(email, password, onSuccess, onError);
+}
+
+export function signOut(onSuccess) {
+    return new AuthHelper(Firebase).signOut(onSuccess);
 }
