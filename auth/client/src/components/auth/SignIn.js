@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from "redux-form";
+import {connect} from 'react-redux';
+import * as actions from '../../actions';
 
 const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 
@@ -27,8 +29,8 @@ class SignIn extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit(values) {
-        console.log(values);
+    onSubmit({email, password}) {
+        this.props.signInUser({email, password});
     }
 
     render() {
@@ -73,4 +75,4 @@ function validate({email, password}) {
 export default reduxForm({
     form: 'SignInForm',
     validate
-})(SignIn);
+})(connect(null, actions)(SignIn));
